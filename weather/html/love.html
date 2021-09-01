@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://localhost/nisarg/abs/jstask/love.css">
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+               <h1 class="display-1">LOVE CALCULATOR</h1>
+            </div>
+                
+            </div>
+        <div class="row">
+            <div class="weather-card one">
+				<div class="top">
+					<div class="wrapper">
+						<div class="mynav">
+							<a href="javascript:;"><span class="lnr lnr-chevron-left"></span></a>
+							<a href="javascript:;"><span class="lnr lnr-cog"></span></a>
+              <img  class="seen" src="" , alt="">
+						</div>
+						<h1 class="heading">Clear night</h1>
+						<h3 class="location locq">Vadodara</h3><h3 class="country location">India</h3>
+						<p class="temp">
+							<span class="temp-value tv"></span>
+							<span class="deg">0</span>
+							<a href="javascript:;"><span class="temp-type">C</span></a>
+						</p>
+					</div>
+				</div>
+				<div class="bottom">
+					<div class="wrapper">
+						<ul class="forecast">
+							<a href="javascript:;"><span class="lnr lnr-chevron-up go-up"></span></a>
+							<li class="active">
+								<span class="date">Yesterday</span>
+								<span class="lnr lnr-sun condition">
+									<span class="temp">23<span class="deg">0</span><span class="temp-type">C</span></span>
+								</span>
+							</li>
+							<li>
+								<span class="date">Tomorrow</span>
+								<span class="lnr lnr-cloud condition">
+									<span class="temp">21<span class="deg">0</span><span class="temp-type">C</span></span>
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="btn btn-primary btnaa" onclick="back()">go back</div>
+              </div>
+            </div>
+              
+
+
+
+<script>
+        
+  async function getweatherdata(city)
+  {     
+        try{
+
+          if(city==null || city==undefined){
+            throw  alert("this is error");
+          }
+
+        let x=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=eee6da6aa28e329800662a762083683f`);
+       // let y=await JSON.parse(x);
+   //    let y= await x.text();
+    //   console.log(typeof(y));
+
+       let w= await x.json();
+
+   //    let e=await JSON.parse(x);
+   //    console.log(e);
+        console.log("this is data " + "",w);
+
+        var xwwq = w.clouds.all;
+        var currentw=w.weather[0].description;
+        console.log("this is description",currentw);
+        var icon=w.weather[0].icon;
+        //console.log(icon);
+        var href=`http://openweathermap.org/img/wn/${icon}@2x.png`
+     var t=document.querySelector(".seen");
+          t.setAttribute("src",href);
+
+          document.querySelector(".heading").textContent=currentw.toUpperCase();
+
+
+      console.log("cloudes coverded ",xwwq);
+     
+
+      document.querySelector(".tv").textContent=ktoc(w.main.temp).toFixed(0);
+
+
+        
+    return w;
+        }
+        catch(error){
+          console.log(error);
+        }
+
+  }
+  
+function ktoc(kelvin) {
+
+  var cel=kelvin-273.15;
+  return cel;
+
+  
+}
+
+function back() {
+  window.location.href = "http://localhost/nisarg/indian-States-Cities-Database-master/";
+  
+}
+//var city= document.querySelector(".locq").textContent;
+//city="Mumbai";
+var s=localStorage.getItem("city");
+city=s;
+console.log(s);
+document.querySelector(".locq").textContent=s;
+
+var t= getweatherdata(city);
+  console.log("this is t",t);
+
+
+// var p=t;
+//  console.log("i am checking");
+//  console.log(p);
+
+
+  
+</script>
+        <div class="row">
+            <div class="col-lg-12">
+               <h1 class="display-1">LOVE CALCULATOR</h1>
+            </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
